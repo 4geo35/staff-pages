@@ -12,6 +12,7 @@ use GIS\StaffPages\Observers\EmployeeObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use GIS\StaffPages\Livewire\Admin\Departments\IndexWire as AdminDepartmentIndexWire;
 
 class StaffPagesServiceProvider extends ServiceProvider
 {
@@ -93,5 +94,10 @@ class StaffPagesServiceProvider extends ServiceProvider
 
     protected function addLivewireComponents(): void
     {
+        $component = config("staff-pages.customAdminDepartmentIndexComponent");
+        Livewire::component(
+            "sp-admin-department-index",
+            $component ?? AdminDepartmentIndexWire::class
+        );
     }
 }

@@ -2,6 +2,13 @@
 
 return [
     "employeePrefix" => "employees",
+    "employeePageTitle" => "Сотрудники",
+
+    "departmentPrefix" => "departments",
+    "departmentPageTitle" => "Отделы",
+
+    "useBreadcrumbs" => true,
+    "useH1" => true,
 
     // Admin
     "customDepartmentModel" => null,
@@ -9,6 +16,11 @@ return [
 
     "customEmployeeModel" => null,
     "customEmployeeModelObserver" => null,
+
+    "customAdminDepartmentController" => null,
+
+    // Components
+    "customAdminDepartmentIndexComponent" => null,
 
     // Policy
     "departmentPolicy" => \GIS\StaffPages\Policies\EmployeeDepartmentPolicy::class,
