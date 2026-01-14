@@ -3,6 +3,9 @@
 namespace GIS\StaffPages;
 
 use GIS\Fileable\Traits\ExpandTemplatesTrait;
+use GIS\StaffPages\Interfaces\EmployeeDepartmentInterface;
+use GIS\StaffPages\Models\EmployeeDepartment;
+use GIS\StaffPages\Observers\EmployeeDepartmentObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -41,6 +44,8 @@ class StaffPagesServiceProvider extends ServiceProvider
 
     protected function bindInterfaces(): void
     {
+        $modelClass = config("staff-pages.customDepartmentModel") ?? EmployeeDepartment::class;
+        $this->app->bind(EmployeeDepartmentInterface::class, $modelClass);
     }
 
     protected function expandConfiguration(): void
@@ -50,17 +55,24 @@ class StaffPagesServiceProvider extends ServiceProvider
 
         $um = app()->config["user-management"];
         $permissions = $um["permissions"];
-        // TODO: add permissions
+        $permissions[] = [
+            "policy" => $sp["departmentPolicy"],
+            "title" => $sp["departmentPolicyTitle"],
+            "key" => $sp["departmentPolicyKey"],
+        ];
         app()->config["user-management.permissions"] = $permissions;
     }
 
     protected function observeModels(): void
     {
+        $modelClass = config("staff-pages.customDepartmentModel") ?? EmployeeDepartment::class;
+        $observerClass = config("staff-pages.customDepartmentModelObserver") ?? EmployeeDepartmentObserver::class;
+        $modelClass::observe($observerClass);
     }
 
     protected function setPolicies(): void
     {
-        // TODO: set policy gate
+        Gate::policy(config("staff-pages.customDepartmentModel") ?? EmployeeDepartment::class, config("staff-pages.departmentPolicy"));
     }
 
     protected function addLivewireComponents(): void
