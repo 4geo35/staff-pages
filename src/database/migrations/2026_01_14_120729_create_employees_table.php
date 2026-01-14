@@ -11,16 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employee_departments', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
 
-            $table->string("title");
-            $table->string("slug")->unique();
+            $table->string("last_name");
+            $table->string("name");
+            $table->string("patronymic")->nullable();
+
+            $table->unsignedBigInteger("image_id")->nullable();
+
             $table->string("short")->nullable();
             $table->text("description")->nullable();
+            $table->text("comment")->nullable();
 
             $table->unsignedBigInteger("priority")->default(0);
             $table->dateTime("published_at")->nullable();
+
+            $table->dateTime("enable_btn")->nullable();
 
             $table->timestamps();
         });
@@ -31,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee_departments');
+        Schema::dropIfExists('employees');
     }
 };
