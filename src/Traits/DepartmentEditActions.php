@@ -44,10 +44,96 @@ trait DepartmentEditActions
         $this->resetFields();
     }
 
+    public function showEdit(int $departmentId): void
+    {
+        $this->resetFields();
+        $this->departmentId = $departmentId;
+        $department = $this->findModel();
+        if (! $department) { return; }
+        if (! $this->checkAuth("update", $department)) { return; }
+
+        $this->title = $department->title;
+        $this->slug = $department->slug;
+        $this->short = $department->short;
+        $this->description = $department->description;
+
+        $this->displayData = true;
+    }
+
+    public function update(): void
+    {
+        $department = $this->findModel();
+        if (! $department) { return; }
+        if (! $this->checkAuth("update", $department)) { return; }
+        $this->validate();
+
+        $slugHasChanged = $this->slug !== $department->slug;
+
+        $department->update([
+            "title" => $this->title,
+            "slug" => $this->slug,
+            "short" => $this->short,
+            "description" => $this->description,
+        ]);
+        /**
+         * @var EmployeeDepartmentInterface $department
+         */
+        session()->flash("success", "Отдел успешно обновлен");
+        $this->closeData();
+        if (isset($this->department)) {
+            $this->department->fresh();
+            if ($slugHasChanged) {
+                $this->redirectRoute("admin.departments.show", ["department" => $this->department]);
+            }
+        }
+    }
+
     public function closeDelete(): void
     {
         $this->displayDelete = false;
         $this->resetFields();
+    }
+
+    public function showDelete(int $departmentId): void
+    {
+        $this->resetFields();
+        $this->departmentId = $departmentId;
+        $department = $this->findModel();
+        if (! $department) { return; }
+        if (! $this->checkAuth("delete", $department)) { return; }
+        $this->displayDelete = true;
+    }
+
+    public function confirmDelete(): void
+    {
+        $department = $this->findModel();
+        if (! $department) { return; }
+        if (! $this->checkAuth("delete", $department)) { return; }
+        try {
+            $department->delete();
+            session()->flash("success", "Отдел успешно удален");
+        } catch (\Exception $e) {
+            session()->flash("error", "Ошибка при удалении отдела ");
+        }
+
+        $this->closeDelete();
+        if (isset($this->department)) {
+            $this->redirectRoute("admin.departments.index");
+        }
+    }
+
+    public function switchPublish(int $departmentId): void
+    {
+        $this->resetFields();
+        $this->departmentId = $departmentId;
+        $department = $this->findModel();
+        if (! $department) { return; }
+        if (! $this->checkAuth("update", $department)) { return; }
+
+        $department->update([
+            "published_at" => $department->published_at ? null : now(),
+        ]);
+        if (isset($this->department)) { $this->department->fresh(); }
     }
 
     protected function resetFields(): void

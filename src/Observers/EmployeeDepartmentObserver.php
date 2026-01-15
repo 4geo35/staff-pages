@@ -16,4 +16,9 @@ class EmployeeDepartmentObserver
         if (empty($priority)) { $priority = 0; }
         $department->priority = $priority + 1;
     }
+
+    public function deleted(EmployeeDepartmentInterface $department): void
+    {
+        $department->employees()->detach();
+    }
 }

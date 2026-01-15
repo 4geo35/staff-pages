@@ -69,4 +69,37 @@ class IndexWire extends Component
         session()->flash("success", "Отдел успешно добавлен");
         $this->closeData();
     }
+
+    public function showOrder(): void
+    {
+        if (! $this->checkAuth("order")) { return; }
+        $this->displayOrder = true;
+        $this->setDepartmentList();
+        $this->dispatch("update-list");
+    }
+
+    public function reorderItems(array $newOrder): void
+    {
+        if (! $this->checkAuth("order")) { return; }
+
+        foreach ($newOrder as $priority => $id) {
+            $this->departmentId = $id;
+            $department = $this->findModel();
+            if (! $department) { continue; }
+            $department->priority = $priority;
+            $department->save();
+        }
+
+        $this->resetFields();
+        $this->setDepartmentList();
+    }
+
+    protected function setDepartmentList(): void
+    {
+        $modelClass = config("staff-pages.customDepartmentModel") ?? EmployeeDepartment::class;
+        $this->list = $modelClass::query()
+            ->select("id", "title")
+            ->orderBy("priority")
+            ->get();
+    }
 }
