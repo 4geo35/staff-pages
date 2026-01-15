@@ -32,7 +32,7 @@ class Employee extends Model implements EmployeeInterface
     public function departments(): BelongsToMany
     {
         $modelClass = config("staff-pages.customDepartmentModel") ?? EmployeeDepartment::class;
-        return $this->belongsToMany($modelClass, "employee_department",  "department_id", "employee_id");
+        return $this->belongsToMany($modelClass, "department_employee",  "department_id", "employee_id");
     }
 
     public function getFioAttribute(): string

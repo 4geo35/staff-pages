@@ -113,7 +113,7 @@ trait DepartmentEditActions
             $department->delete();
             session()->flash("success", "Отдел успешно удален");
         } catch (\Exception $e) {
-            session()->flash("error", "Ошибка при удалении отдела ");
+            session()->flash("error", "Ошибка при удалении отдела");
         }
 
         $this->closeDelete();
