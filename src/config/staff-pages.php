@@ -21,6 +21,7 @@ return [
 
     // Components
     "customAdminDepartmentIndexComponent" => null,
+    "customAdminDepartmentShowComponent" => null,
 
     // Policy
     "departmentPolicy" => \GIS\StaffPages\Policies\EmployeeDepartmentPolicy::class,

@@ -13,6 +13,7 @@ Route::middleware(["web", "auth", "app-management"])
             ->group(function () {
                 $controllerClass = config("staff-pages.customAdminDepartmentController") ?? DepartmentController::class;
                 Route::get("/", [$controllerClass, "index"])->name("index");
+                Route::get("/{department}", [$controllerClass, "show"])->name("show");
             });
 
         Route::prefix(config("staff-pages.employeePrefix"))

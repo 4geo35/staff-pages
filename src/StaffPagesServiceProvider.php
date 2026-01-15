@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use GIS\StaffPages\Livewire\Admin\Departments\IndexWire as AdminDepartmentIndexWire;
+use GIS\StaffPages\Livewire\Admin\Departments\ShowWire as AdminDepartmentShowWire;
 
 class StaffPagesServiceProvider extends ServiceProvider
 {
@@ -98,6 +99,12 @@ class StaffPagesServiceProvider extends ServiceProvider
         Livewire::component(
             "sp-admin-department-index",
             $component ?? AdminDepartmentIndexWire::class
+        );
+
+        $component = config("staff-pages.customAdminDepartmentShowComponent");
+        Livewire::component(
+            "sp-admin-department-show",
+            $component ?? AdminDepartmentShowWire::class
         );
     }
 }

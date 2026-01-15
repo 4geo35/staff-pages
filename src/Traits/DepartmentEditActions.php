@@ -81,7 +81,7 @@ trait DepartmentEditActions
         session()->flash("success", "Отдел успешно обновлен");
         $this->closeData();
         if (isset($this->department)) {
-            $this->department->fresh();
+            $this->department = $department;
             if ($slugHasChanged) {
                 $this->redirectRoute("admin.departments.show", ["department" => $this->department]);
             }
@@ -133,7 +133,7 @@ trait DepartmentEditActions
         $department->update([
             "published_at" => $department->published_at ? null : now(),
         ]);
-        if (isset($this->department)) { $this->department->fresh(); }
+        if (isset($this->department)) { $this->department = $department; }
     }
 
     protected function resetFields(): void
