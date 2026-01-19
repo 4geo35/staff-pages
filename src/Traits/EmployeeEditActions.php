@@ -169,7 +169,7 @@ trait EmployeeEditActions
 
     protected function resetFields(): void
     {
-        $this->reset("lastName", "name", "patronymic", "slug", "short", "description", "comment", "enableBtn", "cover", "coverUrl");
+        $this->reset("lastName", "name", "patronymic", "slug", "short", "description", "comment", "enableBtn", "cover", "coverUrl", "employeeId");
     }
 
     protected function checkAuth(string $action, EmployeeInterface $employee = null): bool
