@@ -2,6 +2,7 @@
 
 namespace GIS\StaffPages\Models;
 
+use GIS\Fileable\Traits\ShouldGallery;
 use GIS\Fileable\Traits\ShouldImage;
 use GIS\Metable\Traits\ShouldMeta;
 use GIS\StaffPages\Interfaces\EmployeeInterface;
@@ -9,10 +10,11 @@ use GIS\TraitsHelpers\Traits\ShouldMarkdown;
 use GIS\TraitsHelpers\Traits\ShouldSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Employee extends Model implements EmployeeInterface
 {
-    use ShouldMeta, ShouldMarkdown, ShouldImage, ShouldSlug;
+    use ShouldMeta, ShouldMarkdown, ShouldImage, ShouldSlug, ShouldGallery;
 
     protected string $slugKey = "fio";
 
@@ -56,5 +58,12 @@ class Employee extends Model implements EmployeeInterface
     public function getTitleAttribute(): string
     {
         return $this->fio;
+    }
+
+    public function getCommentMarkdownAttribute(): string
+    {
+        $value = $this->comment;
+        if (! $value) return $value;
+        return Str::markdown($value);
     }
 }

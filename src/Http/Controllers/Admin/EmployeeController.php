@@ -21,6 +21,7 @@ class EmployeeController extends Controller
     public function show(EmployeeInterface $employee): View
     {
         Gate::authorize("viewAny", $employee);
+        $employee->load("orderedDepartments");
         return view("sp::admin.employees.show", compact("employee"));
     }
 }
