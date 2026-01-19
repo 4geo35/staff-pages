@@ -40,12 +40,7 @@ class IndexWire extends Component
         )";
 
         $modelClass = config("staff-pages.customEmployeeModel") ?? Employee::class;
-        $query = $modelClass::query()
-            ->select(
-                "id", "last_name", "name", "patronymic",
-                "image_id", "short", "priority", "published_at", "enable_btn",
-                DB::raw("$sqlReplace AS qfn"),
-            );
+        $query = $modelClass::query()->select("*", DB::raw("$sqlReplace AS qfn"));
         if (! empty($this->searchName)) {
             $value = trim($this->searchName);
             $query->where(DB::raw($sqlReplace), "like", "%$value%");
