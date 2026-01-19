@@ -109,11 +109,14 @@ trait DepartmentEditActions
         $department = $this->findModel();
         if (! $department) { return; }
         if (! $this->checkAuth("delete", $department)) { return; }
+
         try {
             $department->delete();
             session()->flash("success", "Отдел успешно удален");
         } catch (\Exception $e) {
             session()->flash("error", "Ошибка при удалении отдела");
+            $this->closeDelete();
+            return;
         }
 
         $this->closeDelete();

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string("name");
             $table->string("patronymic")->nullable();
 
+            $table->string("slug")->unique();
+
             $table->unsignedBigInteger("image_id")->nullable();
 
             $table->string("short")->nullable();

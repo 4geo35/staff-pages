@@ -10,6 +10,8 @@ return [
     "useBreadcrumbs" => true,
     "useH1" => true,
 
+    "useEnableBtn" => true,
+
     // Admin
     "customDepartmentModel" => null,
     "customDepartmentModelObserver" => null,
@@ -19,9 +21,17 @@ return [
 
     "customAdminDepartmentController" => null,
 
+    // Form titles
+    "employeeShort" => "Специализация",
+    "employeeDescription" => "Описание",
+    "employeeComment" => "График работы",
+    "employeeEnableBtn" => "Включить запись на прием",
+
     // Components
     "customAdminDepartmentIndexComponent" => null,
     "customAdminDepartmentShowComponent" => null,
+
+    "customAdminEmployeeIndexComponent" => null,
 
     // Policy
     "departmentPolicy" => \GIS\StaffPages\Policies\EmployeeDepartmentPolicy::class,

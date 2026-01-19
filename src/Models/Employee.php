@@ -43,4 +43,13 @@ class Employee extends Model implements EmployeeInterface
             $this->patronymic,
         ]));
     }
+
+    /**
+     * Title for meta
+     * @return string
+     */
+    public function getTitleAttribute(): string
+    {
+        return $this->fio;
+    }
 }

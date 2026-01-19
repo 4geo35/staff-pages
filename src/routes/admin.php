@@ -21,5 +21,6 @@ Route::middleware(["web", "auth", "app-management"])
             ->group(function () {
                 $controllerClass = config("staff-pages.customAdminEmployeeController") ?? EmployeeController::class;
                 Route::get("/", [$controllerClass, "index"])->name("index");
+                Route::get("/{employee}", [$controllerClass, "show"])->name("show");
             });
     });

@@ -14,6 +14,7 @@ use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use GIS\StaffPages\Livewire\Admin\Departments\IndexWire as AdminDepartmentIndexWire;
 use GIS\StaffPages\Livewire\Admin\Departments\ShowWire as AdminDepartmentShowWire;
+use GIS\StaffPages\Livewire\Admin\Employees\IndexWire as AdminEmployeeIndexWire;
 
 class StaffPagesServiceProvider extends ServiceProvider
 {
@@ -105,6 +106,12 @@ class StaffPagesServiceProvider extends ServiceProvider
         Livewire::component(
             "sp-admin-department-show",
             $component ?? AdminDepartmentShowWire::class
+        );
+
+        $component = config("staff-pages.customAdminEmployeeIndexComponent");
+        Livewire::component(
+            "sp-admin-employee-index",
+            $component ?? AdminEmployeeIndexWire::class
         );
     }
 }
