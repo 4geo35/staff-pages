@@ -3,6 +3,7 @@
         <tr>
             <x-tt::table.heading class="text-left">ФИО</x-tt::table.heading>
             <x-tt::table.heading class="text-left">Адресная строка</x-tt::table.heading>
+            <x-tt::table.heading class="text-left">{{ config("staff-pages.departmentPageTitle") }}</x-tt::table.heading>
             @if (config("staff-pages.useEnableBtn"))
                 <x-tt::table.heading class="text-left text-nowrap">{{ config("staff-pages.employeeEnableBtn") }}</x-tt::table.heading>
             @endif
@@ -14,6 +15,18 @@
             <tr>
                 <td>{{ $item->fio }}</td>
                 <td>{{ $item->slug }}</td>
+                <td>
+                    <ul>
+                        @foreach($item->orderedDepartments as $department)
+                            <li>
+                                <a href="{{ route('admin.departments.show', compact('department')) }}"
+                                   class="text-primary hover:text-primary-hover">
+                                    {{ $department->title }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </td>
                 @if (config("staff-pages.useEnableBtn"))
                     <td>{{ $item->enable_btn ? "Да" : "Нет" }}</td>
                 @endif

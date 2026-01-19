@@ -19,4 +19,5 @@ interface EmployeeInterface extends Arrayable, ArrayAccess, CanBeEscapedWhenCast
     ShouldMetaInterface, ShouldImageInterface
 {
     public function departments(): BelongsToMany;
+    public function orderedDepartments(): BelongsToMany;
 }

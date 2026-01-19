@@ -55,6 +55,16 @@
                 <x-tt::form.error name="slug"/>
             </div>
 
+            @if (config("staff-pages.useEnableBtn"))
+                <div class="form-check">
+                    <input type="checkbox" wire:model="enableBtn" id="enableBtn"
+                           class="form-check-input {{ $errors->has('enableBtn') ? 'border-danger' : '' }}"/>
+                    <label for="enableBtn" class="form-check-label">
+                        {{ config("staff-pages.employeeEnableBtn") }}
+                    </label>
+                </div>
+            @endif
+
             <div>
                 <label for="cover" class="inline-block mb-2">Изображение</label>
                 <input type="file" id="cover"
@@ -76,15 +86,24 @@
                 <x-tt::form.error name="short"/>
             </div>
 
-            @if (config("staff-pages.useEnableBtn"))
-                <div class="form-check">
-                    <input type="checkbox" wire:model="enableBtn" id="enableBtn"
-                           class="form-check-input {{ $errors->has('enableBtn') ? 'border-danger' : '' }}"/>
-                    <label for="enableBtn" class="form-check-label">
-                        {{ config("staff-pages.employeeEnableBtn") }}
-                    </label>
-                </div>
-            @endif
+            <div>
+                <div class="inline-block mb-2">{{ config("staff-pages.departmentPageTitle") }}</div>
+                @isset($departmentList)
+                    <div class="space-y-2">
+                        @foreach($departmentList as $departmentItem)
+                            <div class="form-check">
+                                <input type="checkbox" wire:model="departments"
+                                       class="form-check-input" id="employee-department-{{ $departmentItem->id }}"
+                                       value="{{ $departmentItem->id }}">
+                                <label for="employee-department-{{ $departmentItem->id }}"
+                                       class="form-check-label {{ $departmentItem->published_at ? '' : 'text-danger' }}">
+                                    {{ $departmentItem->title }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                @endisset
+            </div>
 
             <div>
                 <label for="description" class="flex justify-start items-center mb-2">

@@ -35,6 +35,11 @@ class Employee extends Model implements EmployeeInterface
         return $this->belongsToMany($modelClass, "department_employee",  "department_id", "employee_id");
     }
 
+    public function orderedDepartments(): BelongsToMany
+    {
+        return $this->departments()->orderBy("priority");
+    }
+
     public function getFioAttribute(): string
     {
         return trim(implode(" ", [

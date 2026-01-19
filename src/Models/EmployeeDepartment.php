@@ -26,4 +26,9 @@ class EmployeeDepartment extends Model implements EmployeeDepartmentInterface
         $modelClass = config("staff-pages.customEmployeeModel") ?? Employee::class;
         return $this->belongsToMany($modelClass, "department_employee", "employee_id", "department_id");
     }
+
+    public function orderedEmployees(): BelongsToMany
+    {
+        return $this->employees()->orderBy("priority");
+    }
 }

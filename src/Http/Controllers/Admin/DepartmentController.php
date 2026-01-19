@@ -20,6 +20,7 @@ class DepartmentController extends Controller
     public function show(EmployeeDepartmentInterface $department): View
     {
         Gate::authorize("viewAny", $department);
+        $department->load("orderedEmployees");
         return view("sp::admin.departments.show", compact("department"));
     }
 }

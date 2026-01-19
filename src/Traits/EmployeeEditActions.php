@@ -4,8 +4,10 @@ namespace GIS\StaffPages\Traits;
 
 use GIS\StaffPages\Interfaces\EmployeeInterface;
 use GIS\StaffPages\Models\Employee;
+use GIS\StaffPages\Models\EmployeeDepartment;
 use GIS\TraitsHelpers\Traits\WireDeleteImageTrait;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
@@ -28,6 +30,8 @@ trait EmployeeEditActions
     public bool $enableBtn = false;
     public TemporaryUploadedFile|null $cover = null;
     public string|null $coverUrl = null;
+    public Collection|null $departmentList = null;
+    public array $departments = [];
 
     public function rules(): array
     {
@@ -81,8 +85,12 @@ trait EmployeeEditActions
             $employee->load("image");
             $this->coverUrl = route("thumb-img", ["filename" => $employee->image->filename, "template" => "original"]);
         } else { $this->coverUrl = null; }
+        foreach ($employee->departments as $department) {
+            $this->departments[] = $department->id;
+        }
 
         $this->displayData = true;
+        $this->setDepartmentList();
     }
 
     public function update(): void
@@ -105,6 +113,7 @@ trait EmployeeEditActions
             "enable_btn" => $this->enableBtn ? now() : null,
         ]);
         $employee->livewireImage($this->cover);
+        $employee->departments()->sync($this->departments);
         session()->flash("success", "Сотрудник успешно обновлен");
         $this->closeData();
 
@@ -169,7 +178,12 @@ trait EmployeeEditActions
 
     protected function resetFields(): void
     {
-        $this->reset("lastName", "name", "patronymic", "slug", "short", "description", "comment", "enableBtn", "cover", "coverUrl", "employeeId");
+        $this->reset(
+            "lastName", "name", "patronymic", "slug",
+            "short", "description", "comment",
+            "enableBtn", "cover", "coverUrl",
+            "employeeId", "departments"
+        );
     }
 
     protected function checkAuth(string $action, EmployeeInterface $employee = null): bool
@@ -197,5 +211,14 @@ trait EmployeeEditActions
             return null;
         }
         return $employee;
+    }
+
+    protected function setDepartmentList(): void
+    {
+        $modelClass = config("staff-pages.customDepartmentModel") ?? EmployeeDepartment::class;
+        $this->departmentList = $modelClass::query()
+            ->select("id", "title", "published_at")
+            ->orderBy("priority")
+            ->get();
     }
 }

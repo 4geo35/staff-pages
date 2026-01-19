@@ -40,7 +40,8 @@ class IndexWire extends Component
         )";
 
         $modelClass = config("staff-pages.customEmployeeModel") ?? Employee::class;
-        $query = $modelClass::query()->select("*", DB::raw("$sqlReplace AS qfn"));
+        $query = $modelClass::query()->select("*", DB::raw("$sqlReplace AS qfn"))
+            ->with("orderedDepartments");
         if (! empty($this->searchName)) {
             $value = trim($this->searchName);
             $query->where(DB::raw($sqlReplace), "like", "%$value%");
@@ -62,6 +63,7 @@ class IndexWire extends Component
         $this->resetFields();
         if (! $this->checkAuth("create")) { return; }
         $this->displayData = true;
+        $this->setDepartmentList();
     }
 
     public function store(): void
@@ -84,6 +86,7 @@ class IndexWire extends Component
          * @var EmployeeInterface $employee
          */
         $employee->livewireImage($this->cover);
+        $employee->departments()->sync($this->departments);
         session()->flash("success", "Сотрудник успешно добавлен");
         $this->closeData();
     }
