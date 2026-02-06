@@ -20,5 +20,12 @@ class EmployeeObserver
     public function deleted(EmployeeInterface $employee): void
     {
         $employee->departments()->detach();
+
+        if (config("staff-doctors")) {
+            $employee->doctorInfo->delete();
+            foreach ($employee->offers as $offer) {
+                $offer->delete();
+            }
+        }
     }
 }

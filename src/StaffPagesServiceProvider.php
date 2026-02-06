@@ -30,7 +30,6 @@ class StaffPagesServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/routes/admin.php');
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 
-        $this->initFacades();
         $this->bindInterfaces();
     }
 
@@ -43,10 +42,6 @@ class StaffPagesServiceProvider extends ServiceProvider
         $this->setPolicies();
 
         $this->addLivewireComponents();
-    }
-
-    protected function initFacades(): void
-    {
     }
 
     protected function bindInterfaces(): void

@@ -13,6 +13,8 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use JsonSerializable;
 use Stringable;
 interface EmployeeInterface extends Arrayable, ArrayAccess, CanBeEscapedWhenCastToString,
@@ -21,4 +23,6 @@ interface EmployeeInterface extends Arrayable, ArrayAccess, CanBeEscapedWhenCast
 {
     public function departments(): BelongsToMany;
     public function orderedDepartments(): BelongsToMany;
+    public function doctorInfo(): HasOne;
+    public function offers(): HasMany;
 }

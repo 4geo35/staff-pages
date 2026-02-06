@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use JsonSerializable;
 use Stringable;
 interface EmployeeDepartmentInterface extends Arrayable, ArrayAccess, CanBeEscapedWhenCastToString,
@@ -18,4 +19,6 @@ interface EmployeeDepartmentInterface extends Arrayable, ArrayAccess, CanBeEscap
     ShouldMetaInterface
 {
     public function employees(): BelongsToMany;
+    public function orderedEmployees(): BelongsToMany;
+    public function offers(): HasMany;
 }

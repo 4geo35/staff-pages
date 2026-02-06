@@ -4,6 +4,7 @@
 
     <div class="space-y-indent-half">
         <livewire:sp-admin-employee-show :$employee />
+        @includeIf("sd::admin.doctors.card", compact("employee"))
         <livewire:fa-images :model="$employee" />
         <livewire:ma-metas :model="$employee" />
     </div>

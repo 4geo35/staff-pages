@@ -5,11 +5,15 @@ namespace GIS\StaffPages\Models;
 use GIS\Fileable\Traits\ShouldGallery;
 use GIS\Fileable\Traits\ShouldImage;
 use GIS\Metable\Traits\ShouldMeta;
+use GIS\StaffDoctors\Models\DoctorInfo;
+use GIS\StaffDoctors\Models\DoctorOffer;
 use GIS\StaffPages\Interfaces\EmployeeInterface;
 use GIS\TraitsHelpers\Traits\ShouldMarkdown;
 use GIS\TraitsHelpers\Traits\ShouldSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Employee extends Model implements EmployeeInterface
@@ -40,6 +44,26 @@ class Employee extends Model implements EmployeeInterface
     public function orderedDepartments(): BelongsToMany
     {
         return $this->departments()->orderBy("priority");
+    }
+
+    public function doctorInfo(): HasOne
+    {
+        if (config("staff-doctors")) {
+            $modelClass = config("staff-doctors.customDoctorInfoModel") ?? DoctorInfo::class;
+            return $this->hasOne($modelClass, "employee_id");
+        } else {
+            return new HasOne($this->newQuery(), $this, "", "");
+        }
+    }
+
+    public function offers(): HasMany
+    {
+        if (config("staff-doctors")) {
+            $modelClass = config("staff-doctors.customDoctorOfferModel") ?? DoctorOffer::class;
+            return $this->hasMany($modelClass, "doctor_id");
+        } else {
+            return new HasMany($this->newQuery(), $this, "", "");
+        }
     }
 
     public function getFioAttribute(): string

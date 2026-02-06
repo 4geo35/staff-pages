@@ -110,6 +110,12 @@ trait DepartmentEditActions
         if (! $department) { return; }
         if (! $this->checkAuth("delete", $department)) { return; }
 
+        if (config("staff-doctors") && $department->offers()->count() > 0) {
+            session()->flash("error", "Невозможно удалить отдел, есть предложения");
+            $this->closeDelete();
+            return;
+        }
+
         try {
             $department->delete();
             session()->flash("success", "Отдел успешно удален");
