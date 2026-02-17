@@ -12,14 +12,20 @@ return [
 
     "useEnableBtn" => true,
 
-    // Admin
+    "fullCol" => false,
+
+    // Models
     "customDepartmentModel" => null,
     "customDepartmentModelObserver" => null,
 
     "customEmployeeModel" => null,
     "customEmployeeModelObserver" => null,
 
+    // Controllers
     "customAdminDepartmentController" => null,
+    "customAdminEmployeeController" => null,
+
+    "customWebEmployeeController" => null,
 
     // Form titles
     "employeeShort" => "Специализация",
@@ -34,6 +40,8 @@ return [
     "customAdminEmployeeIndexComponent" => null,
     "customAdminEmployeeShowComponent" => null,
 
+    "customWebEmployeeIndexComponent" => null,
+
     // Policy
     "departmentPolicy" => \GIS\StaffPages\Policies\EmployeeDepartmentPolicy::class,
     "departmentPolicyTitle" => "Управление отделами сотрудников",
@@ -42,4 +50,9 @@ return [
     "employeePolicy" => \GIS\StaffPages\Policies\EmployeePolicy::class,
     "employeePolicyTitle" => "Управление сотрудниками",
     "employeePolicyKey" => "employees",
+
+    // Templates
+    "templates" => [
+        "employee-teaser" => \GIS\StaffPages\Templates\EmployeeTeaser::class,
+    ],
 ];
