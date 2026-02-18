@@ -3,8 +3,10 @@
 namespace GIS\StaffPages;
 
 use GIS\Fileable\Traits\ExpandTemplatesTrait;
+use GIS\RequestForm\Traits\ExpandFormsTrait;
 use GIS\StaffPages\Interfaces\EmployeeDepartmentInterface;
 use GIS\StaffPages\Interfaces\EmployeeInterface;
+use GIS\StaffPages\Livewire\Web\Forms\WebEmployeeFormWire;
 use GIS\StaffPages\Models\Employee;
 use GIS\StaffPages\Models\EmployeeDepartment;
 use GIS\StaffPages\Observers\EmployeeDepartmentObserver;
@@ -20,7 +22,7 @@ use GIS\StaffPages\Livewire\Web\Employees\IndexWire as WebEmployeeIndexWire;
 
 class StaffPagesServiceProvider extends ServiceProvider
 {
-    use ExpandTemplatesTrait;
+    use ExpandTemplatesTrait, ExpandFormsTrait;
 
     public function register(): void
     {
@@ -58,6 +60,7 @@ class StaffPagesServiceProvider extends ServiceProvider
     {
         $sp = app()->config["staff-pages"];
         $this->expandTemplates($sp);
+        $this->expandForms($sp);
 
         $um = app()->config["user-management"];
         $permissions = $um["permissions"];
@@ -121,6 +124,12 @@ class StaffPagesServiceProvider extends ServiceProvider
         Livewire::component(
             "sp-web-employee-index",
             $component ?? WebEmployeeIndexWire::class
+        );
+
+        $component = config("staff-pages.customWebEmployeeFormComponent");
+        Livewire::component(
+            "sp-web-employee-form",
+            $component ?? WebEmployeeFormWire::class
         );
     }
 }

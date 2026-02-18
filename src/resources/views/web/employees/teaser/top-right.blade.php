@@ -18,4 +18,6 @@
     @endif
 
     @include("sp::web.employees.teaser.gallery")
+
+    @include("sp::web.employees.teaser.buttons")
 </div>

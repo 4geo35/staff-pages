@@ -4,4 +4,7 @@
     @include("sp::web.employees.includes.h1")
 
     <livewire:sp-web-employee-index />
+    @push("modals")
+        <livewire:sp-web-employee-form />
+    @endpush
 </x-app-layout>

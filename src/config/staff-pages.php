@@ -16,12 +16,12 @@ return [
 
     // Btns text
     "galleryBtnTitle" => "Документы проверены",
+    "modalBtnTitle" => "Записаться на прием",
 
-    // Form titles
-    "employeeShort" => "Специализация",
-    "employeeDescription" => "Описание",
-    "employeeComment" => "График работы",
-    "employeeEnableBtn" => "Включить запись на прием",
+    // Modal text
+    "modalTitle" => "Записаться на прием",
+    "modalSubTitle" => "Перезвоним на указанный номер, чтобы подтвердить запись.",
+    "modalEmployeeFieldTitle" => "Специалист",
 
     // Models
     "customDepartmentModel" => null,
@@ -44,6 +44,12 @@ return [
     "customAdminEmployeeShowComponent" => null,
 
     "customWebEmployeeIndexComponent" => null,
+
+    // Admin form titles
+    "employeeShort" => "Специализация",
+    "employeeDescription" => "Описание",
+    "employeeComment" => "График работы",
+    "employeeEnableBtn" => "Включить запись на прием",
 
     // Policy
     "departmentPolicy" => \GIS\StaffPages\Policies\EmployeeDepartmentPolicy::class,
