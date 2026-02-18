@@ -5,6 +5,7 @@ namespace GIS\StaffPages\Livewire\Web\Forms;
 use GIS\RequestForm\Facades\FormActions;
 use GIS\RequestForm\Interfaces\RequestFormShowInterface;
 use GIS\RequestForm\Traits\RequestFormActionsTrait;
+use GIS\StaffPages\Models\EmployeeRequestRecord;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -65,6 +66,26 @@ class WebEmployeeFormWire extends Component implements RequestFormShowInterface
     public function store(): void
     {
         $this->validate();
+        try {
+            $modelClass = config("staff-pages.customEmployeeRequestRecordModel") ?? EmployeeRequestRecord::class;
+            $record = $modelClass::create([
+                "fio" => $this->employeeFio,
+                "name" => $this->name,
+                "phone" => $this->phone,
+                "comment" => $this->comment,
+            ]);
+            $form = $this->createForm($record);
+            if (! $form) {
+                $record->delete();
+                session()->flash("{$this->prefix}error", "Ошибка при сохранении данных");
+            } else {
+                session()->flash("{$this->prefix}success", "Ваше обращение получено! Мы свяжемся с вами в ближайшее время.");
+            }
+        } catch (\Exception $exception) {
+            session()->flash("{$this->prefix}error", "Ошибка при сохранении данных.");
+        }
+
+        $this->resetFields();
     }
 
     public function resetFields(): void

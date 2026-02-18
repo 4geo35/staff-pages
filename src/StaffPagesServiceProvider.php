@@ -6,6 +6,7 @@ use GIS\Fileable\Traits\ExpandTemplatesTrait;
 use GIS\RequestForm\Traits\ExpandFormsTrait;
 use GIS\StaffPages\Interfaces\EmployeeDepartmentInterface;
 use GIS\StaffPages\Interfaces\EmployeeInterface;
+use GIS\StaffPages\Livewire\Admin\Forms\EmployeeRequestTableWire;
 use GIS\StaffPages\Livewire\Web\Forms\WebEmployeeFormWire;
 use GIS\StaffPages\Models\Employee;
 use GIS\StaffPages\Models\EmployeeDepartment;
@@ -130,6 +131,12 @@ class StaffPagesServiceProvider extends ServiceProvider
         Livewire::component(
             "sp-web-employee-form",
             $component ?? WebEmployeeFormWire::class
+        );
+
+        $component = config("staff-pages.customAdminEmployeeFormTableComponent");
+        Livewire::component(
+            "sp-admin-employee-form-table",
+            $component ?? EmployeeRequestTableWire::class
         );
     }
 }

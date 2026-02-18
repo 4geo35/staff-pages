@@ -1,6 +1,8 @@
 <div class="mt-indent-half">
-    <button type="button" class="btn btn-primary" x-data
-            @click="$dispatch('show-employee-form', { key: 'employee-request', employeeFio: '{{ $employee->fio }}' })">
-        {{ config("staff-pages.modalBtnTitle") }}
-    </button>
+    @if (config("staff-pages.useEnableBtn") && $employee->enable_btn)
+        <button type="button" class="btn btn-primary" x-data
+                @click="$dispatch('show-employee-form', { key: 'employee-request', employeeFio: '{{ $employee->fio }}' })">
+            {{ config("staff-pages.modalBtnTitle") }}
+        </button>
+    @endif
 </div>

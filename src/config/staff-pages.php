@@ -14,7 +14,7 @@ return [
 
     "fullCol" => false,
 
-    // Btns text
+    // Btn text
     "galleryBtnTitle" => "Документы проверены",
     "modalBtnTitle" => "Записаться на прием",
 
@@ -22,6 +22,20 @@ return [
     "modalTitle" => "Записаться на прием",
     "modalSubTitle" => "Перезвоним на указанный номер, чтобы подтвердить запись.",
     "modalEmployeeFieldTitle" => "Специалист",
+
+    // Forms
+    "availableForms" => [
+        "employee-request" => [
+            "title" => env("EMPLOYEE_REQUEST_FORM_TITLE", "Записаться на прием"),
+            "notificationRow" => "sp::mail.rows.employee-request",
+            "component" => "sp-web-employee-form",
+            "admin" => "sp::admin.forms.employee-request",
+        ],
+    ],
+    "formExternalExceptions" => ["employee-request"],
+    "customWebEmployeeFormComponent" => null,
+    "customEmployeeRequestRecordModel" => null,
+    "customAdminEmployeeFormTableComponent" => null,
 
     // Models
     "customDepartmentModel" => null,
