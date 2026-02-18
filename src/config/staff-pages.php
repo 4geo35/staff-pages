@@ -10,7 +10,7 @@ return [
     "useBreadcrumbs" => true,
     "useH1" => true,
 
-    "useEnableBtn" => true,
+    "useEnableBtn" => true, // значение false вырубит форму
 
     "fullCol" => false,
 

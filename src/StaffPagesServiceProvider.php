@@ -61,7 +61,9 @@ class StaffPagesServiceProvider extends ServiceProvider
     {
         $sp = app()->config["staff-pages"];
         $this->expandTemplates($sp);
-        $this->expandForms($sp);
+        if (config("staff-pages.useEnableBtn")) {
+            $this->expandForms($sp);
+        }
 
         $um = app()->config["user-management"];
         $permissions = $um["permissions"];
