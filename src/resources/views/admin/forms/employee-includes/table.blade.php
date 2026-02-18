@@ -15,7 +15,7 @@
             <x-tt::table.heading class="text-left text-nowrap"
                                  sortable direction="{{ $orderBy == 'fio' ? $orderByDirection : '' }}"
                                  wire:click="changeOrder('fio')">
-                ФИО
+                {{ config("staff-pages.modalEmployeeFieldTitle") }}
             </x-tt::table.heading>
             <x-tt::table.heading class="text-left text-nowrap">Комментарий</x-tt::table.heading>
             <x-tt::table.heading class="text-left text-nowrap"
