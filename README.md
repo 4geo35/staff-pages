@@ -9,3 +9,7 @@
 "./vendor/4geo35/staff-pages/src/resources/views/livewire/web/**/*.blade.php"` в `tailwind.config.js`, созданный в пакете `tailwindcss-theme`.
 
 Запустить миграции для создания таблиц `php artisan migrate`
+
+Установить lightbox `npm install fslightbox`, добавить в `app.js`:
+
+    import "fslightbox"

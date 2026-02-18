@@ -14,6 +14,15 @@ return [
 
     "fullCol" => false,
 
+    // Btns text
+    "galleryBtnTitle" => "Документы проверены",
+
+    // Form titles
+    "employeeShort" => "Специализация",
+    "employeeDescription" => "Описание",
+    "employeeComment" => "График работы",
+    "employeeEnableBtn" => "Включить запись на прием",
+
     // Models
     "customDepartmentModel" => null,
     "customDepartmentModelObserver" => null,
@@ -26,12 +35,6 @@ return [
     "customAdminEmployeeController" => null,
 
     "customWebEmployeeController" => null,
-
-    // Form titles
-    "employeeShort" => "Специализация",
-    "employeeDescription" => "Описание",
-    "employeeComment" => "График работы",
-    "employeeEnableBtn" => "Включить запись на прием",
 
     // Components
     "customAdminDepartmentIndexComponent" => null,
@@ -54,5 +57,6 @@ return [
     // Templates
     "templates" => [
         "employee-teaser" => \GIS\StaffPages\Templates\EmployeeTeaser::class,
+        "employee-gallery-teaser" => \GIS\StaffPages\Templates\EmployeeGalleryTeaser::class,
     ],
 ];

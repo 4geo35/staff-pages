@@ -1,5 +1,6 @@
-<div>
+<div class="flex-auto">
     <x-tt::h4 class="">{{ $employee->fio }}</x-tt::h4>
+
     @if ($employee->departments->count())
         <ul class="flex flex-wrap">
             @foreach($employee->departments as $departmentItem)
@@ -9,14 +10,12 @@
             @endforeach
         </ul>
     @endif
+
     @if ($employee->comment)
         <div class="prose max-w-none mt-indent-half">
             {!! $employee->comment_markdown !!}
         </div>
     @endif
-    @if ($employee->orderedImages->count())
-        <div class="mt-indent-half">
-            Hello Gallery
-        </div>
-    @endif
+
+    @include("sp::web.employees.teaser.gallery")
 </div>
