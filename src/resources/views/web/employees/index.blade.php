@@ -4,6 +4,7 @@
     @include("sp::web.employees.includes.h1")
 
     <livewire:sp-web-employee-index />
+
     @if (config("staff-pages.useEnableBtn"))
         @push("modals")
             <livewire:sp-web-employee-form />
