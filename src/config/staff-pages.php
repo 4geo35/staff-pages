@@ -13,6 +13,7 @@ return [
     "useEnableBtn" => true, // значение false вырубит форму
 
     "fullCol" => false,
+    "galleryButton" => 3, // Если поставить число, то будет показываться только если изображений больше этого числа
 
     // Btn text
     "galleryBtnTitle" => "Документы проверены",

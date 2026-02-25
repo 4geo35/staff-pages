@@ -1,5 +1,5 @@
 <div class="flex flex-nowrap">
-    <div class="space-y-indent-half w-1/2">
+    <div class="space-y-indent-half w-1/2 xs:w-auto">
         <div class="w-full xs:w-[196px] xs:h-[235px]">
             @if ($hasImage)
                 <picture>
