@@ -46,6 +46,14 @@ class Employee extends Model implements EmployeeInterface
         return $this->departments()->orderBy("priority");
     }
 
+    public function activeDepartments(): BelongsToMany
+    {
+        return $this->departments()
+            ->select("id", "slug", "title")
+            ->whereNotNull("published_at")
+            ->orderBy("priority");
+    }
+
     public function doctorInfo(): HasOne
     {
         if (config("staff-doctors")) {

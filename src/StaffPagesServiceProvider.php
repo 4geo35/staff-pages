@@ -31,15 +31,15 @@ class StaffPagesServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__ . '/config/staff-pages.php', 'staff-pages');
 
-        $this->loadRoutesFrom(__DIR__ . '/routes/admin.php');
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
-
         $this->bindInterfaces();
     }
 
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'sp');
+
+        $this->loadRoutesFrom(__DIR__ . '/routes/admin.php');
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 
         $this->expandConfiguration();
         $this->observeModels();
@@ -61,7 +61,7 @@ class StaffPagesServiceProvider extends ServiceProvider
     {
         $sp = app()->config["staff-pages"];
         $this->expandTemplates($sp);
-        if (config("staff-pages.useEnableBtn")) {
+        if (config("staff-pages.useAvailableForms")) {
             $this->expandForms($sp);
         }
 

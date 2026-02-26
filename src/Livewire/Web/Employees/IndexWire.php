@@ -14,17 +14,20 @@ class IndexWire extends Component
     use WithPagination;
 
     public Collection|null $departmentList = null;
-    public array $searchDepartment = [];
+    public mixed $searchDepartment = [];
 
     protected function queryString(): array
     {
         return [
-            "searchDepartment" => ["except" => "", "as" => "department"],
+            "searchDepartment" => ["except" => "", "as" => config("staff-pages.queryDepartmentKey")],
         ];
     }
 
     public function mount(): void
     {
+        if (! empty($this->searchDepartment) && !is_array($this->searchDepartment)) {
+            $this->searchDepartment = [$this->searchDepartment];
+        }
         $this->setDepartmentList();
     }
 
@@ -40,11 +43,7 @@ class IndexWire extends Component
             );
         }
         $query->with([
-            "image", "orderedImages", "departments" => function ($builder) {
-                $builder->select("id", "slug", "title");
-                $builder->whereNotNull("published_at");
-                $builder->orderBy("priority");
-            }
+            "image", "orderedImages", "activeDepartments"
         ]);
         $query->orderBy("priority");
         $employees = $query->get();

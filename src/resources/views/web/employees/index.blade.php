@@ -5,7 +5,7 @@
 
     <livewire:sp-web-employee-index />
 
-    @if (config("staff-pages.useEnableBtn"))
+    @if (config("staff-pages.useEnableBtn") && config("staff-pages.useAvailableForms"))
         @push("modals")
             <livewire:sp-web-employee-form />
         @endpush

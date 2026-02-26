@@ -18,12 +18,16 @@
     </div>
 
     <div class="flex-auto sm:hidden ml-indent-half w-1/2">
-        <div class="text-h4-mobile font-medium sm:hidden">{{ $employee->fio }}</div>
+        @if (!$isFullPage)
+            <div class="text-h4-mobile font-medium sm:hidden">{{ $employee->fio }}</div>
+        @endif
 
-        @if ($employee->departments->count())
+        @if ($employee->activeDepartments->count())
             <ul class="flex flex-wrap">
-                @foreach($employee->departments as $departmentItem)
-                    <x-sp::department.list-item>{{ $departmentItem->title }}</x-sp::department.list-item>
+                @foreach($employee->activeDepartments as $departmentItem)
+                    <x-sp::department.list-item :$isFullPage :slug="$departmentItem->slug">
+                        {{ $departmentItem->title }}
+                    </x-sp::department.list-item>
                 @endforeach
             </ul>
         @endif

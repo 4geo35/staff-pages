@@ -1,10 +1,12 @@
 <div class="w-full sm:w-auto sm:flex-auto">
-    <x-tt::h4 class="hidden sm:block">{{ $employee->fio }}</x-tt::h4>
+    @if (!$isFullPage) <x-tt::h4 class="hidden sm:block">{{ $employee->fio }}</x-tt::h4> @endif
 
     @if ($employee->departments->count())
         <ul class="hidden sm:flex flex-wrap">
-            @foreach($employee->departments as $departmentItem)
-                <x-sp::department.list-item>{{ $departmentItem->title }}</x-sp::department.list-item>
+            @foreach($employee->activeDepartments as $departmentItem)
+                <x-sp::department.list-item :$isFullPage :slug="$departmentItem->slug">
+                    {{ $departmentItem->title }}
+                </x-sp::department.list-item>
             @endforeach
         </ul>
     @endif
@@ -17,5 +19,5 @@
 
     @include("sp::web.employees.teaser.gallery")
 
-    @include("sp::web.employees.teaser.buttons")
+    @if (!$isFullPage) @include("sp::web.employees.teaser.buttons") @endif
 </div>
