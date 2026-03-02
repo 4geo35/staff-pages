@@ -10,8 +10,10 @@ use GIS\StaffPages\Livewire\Admin\Forms\EmployeeRequestTableWire;
 use GIS\StaffPages\Livewire\Web\Forms\WebEmployeeFormWire;
 use GIS\StaffPages\Models\Employee;
 use GIS\StaffPages\Models\EmployeeDepartment;
+use GIS\StaffPages\Models\EmployeeRequestRecord;
 use GIS\StaffPages\Observers\EmployeeDepartmentObserver;
 use GIS\StaffPages\Observers\EmployeeObserver;
+use GIS\StaffPages\Observers\EmployeeRequestRecordObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -88,6 +90,10 @@ class StaffPagesServiceProvider extends ServiceProvider
 
         $modelClass = config("staff-pages.customEmployeeModel") ?? Employee::class;
         $observerClass = config("staff-pages.customEmployeeModelObserver") ?? EmployeeObserver::class;
+        $modelClass::observe($observerClass);
+
+        $modelClass = config("staff-pages.customEmployeeRequestRecordModel") ?? EmployeeRequestRecord::class;
+        $observerClass = config("staff-pages.customEmployeeRequestRecordObserver") ?? EmployeeRequestRecordObserver::class;
         $modelClass::observe($observerClass);
     }
 

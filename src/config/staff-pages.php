@@ -38,8 +38,10 @@ return [
     ],
     "formExternalExceptions" => ["employee-request"],
     "customWebEmployeeFormComponent" => null,
-    "customEmployeeRequestRecordModel" => null,
     "customAdminEmployeeFormTableComponent" => null,
+
+    "customEmployeeRequestRecordModel" => null,
+    "customEmployeeRequestRecordObserver" => null,
 
     // Models
     "customDepartmentModel" => null,
