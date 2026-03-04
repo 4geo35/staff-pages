@@ -6,5 +6,9 @@
         {{ config("staff-pages.availableForms.employee-request.title") ?? "Записаться на прием" }}
     </x-slot>
 
-    <livewire:sp-admin-employee-form-table />
+    @if (config("staff-doctors"))
+        @includeIf("sd::admin.forms.offer-request-component")
+    @else
+        <livewire:sp-admin-employee-form-table />
+    @endif
 </x-admin-layout>

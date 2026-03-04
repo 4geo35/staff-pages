@@ -8,6 +8,6 @@ class EmployeeRequestRecordObserver
 {
     public function deleted(EmployeeRequestRecordInterface $record): void
     {
-        if ($record->doctor) { $record->doctor->delete(); }
+        if ($record->offer) { $record->offer->delete(); }
     }
 }

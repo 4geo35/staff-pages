@@ -4,6 +4,7 @@
 @if (! empty($form->recordable->fio))
 | {{ config('staff-pages.modalEmployeeFieldTitle') }} | {{ $form->recordable->fio }} |
 @endif
+@includeIf("sd::mail.rows.offer-rows")
 | Имя | {{ $form->recordable->name }} |
 | Телефон | {{ $form->recordable->phone }} |
 | Комментарий | {{ $form->recordable->comment }} |

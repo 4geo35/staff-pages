@@ -50,9 +50,10 @@ class EmployeeRequestTableWire extends Component
             ->with(["recordable", "user"])
             ->where("request_forms.type", "employee-request");
 
-        BuilderActions::extendLike($query, $this->searchName, "service_request_records.name");
-        BuilderActions::extendLike($query, $this->searchPhone, "service_request_records.phone");
-        BuilderActions::extendLike($query, $this->searchFio, "service_request_records.fio");
+        BuilderActions::extendLike($query, $this->searchName, "employee_request_records.name");
+        BuilderActions::extendLike($query, $this->searchPhone, "employee_request_records.phone");
+        BuilderActions::extendLike($query, $this->searchFio, "employee_request_records.fio");
+
         BuilderActions::extendDate($query, $this->searchFrom, $this->searchTo, "request_forms.created_at");
         BuilderActions::extendLike($query, $this->searchUri, "request_forms.uri");
         BuilderActions::extendLike($query, $this->searchPlace, "request_forms.place");

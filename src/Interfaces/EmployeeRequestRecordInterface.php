@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 interface EmployeeRequestRecordInterface
 {
-    public function doctor(): HasOne;
+    public function offer(): HasOne;
 }
