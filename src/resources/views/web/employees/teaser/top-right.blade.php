@@ -19,5 +19,11 @@
 
     @include("sp::web.employees.teaser.gallery")
 
-    @if (!$isFullPage) @include("sp::web.employees.teaser.buttons") @endif
+    @if (!$isFullPage)
+        @include("sp::web.employees.teaser.buttons")
+    @elseif(!empty($anchor))
+        <a href="#{{ $anchor }}" class="btn btn-primary w-full md:w-auto mt-indent-half sm:mr-indent-xs">
+            Записаться на прием
+        </a>
+    @endif
 </div>

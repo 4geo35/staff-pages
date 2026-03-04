@@ -1,4 +1,4 @@
-@props(["employee", "onFullPage" => false, "isFullPage" => false])
+@props(["employee", "onFullPage" => false, "isFullPage" => false, "anchor" => ""])
 @php($hasImage = (bool) $employee->image_id)
 <div class="h-full bg-white px-indent-half sm:px-indent pt-indent-half sm:pt-indent rounded-base">
     <div class="row">
