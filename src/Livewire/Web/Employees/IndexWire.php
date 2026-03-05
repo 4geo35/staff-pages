@@ -42,9 +42,9 @@ class IndexWire extends Component
                 fn($q) => $q->whereIn("slug", $this->searchDepartment)->whereNotNull("published_at")
             );
         }
-        $query->with([
-            "image", "orderedImages", "activeDepartments"
-        ]);
+        $relationsArray = ["image", "orderedImages", "activeDepartments"];
+        if (config("staff-doctors")) { $relationsArray[] = "doctorInfo"; }
+        $query->with($relationsArray);
         $query->orderBy("priority");
         $employees = $query->get();
 
