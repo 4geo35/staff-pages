@@ -19,13 +19,14 @@ return [
     "queryDepartmentKey" => "department",
 
     // Btn text
-    "galleryBtnTitle" => "Документы проверены",
-    "modalBtnTitle" => "Записаться на прием",
+    "galleryBtnTitle" => env("EMPLOYEE_GALLERY_BTN_TITLE", "Документы проверены"),
+    "modalBtnTitle" => env("EMPLOYEE_MODAL_BTN_TITLE", "Записаться на прием"),
+    "anchorBtnTitle" => env("EMPLOYEE_ANCHOR_BTN_TITLE", "Записаться на прием"),
 
     // Modal text
-    "modalTitle" => "Записаться на прием",
-    "modalSubTitle" => "Перезвоним на указанный номер, чтобы подтвердить запись.",
-    "modalEmployeeFieldTitle" => "Специалист",
+    "modalTitle" => env("EMPLOYEE_REQUEST_MODAL_TITLE", "Записаться на прием"),
+    "modalSubTitle" => env("EMPLOYEE_REQUEST_MODAL_SUB_TITLE", "Перезвоним на указанный номер, чтобы подтвердить запись."),
+    "modalEmployeeFieldTitle" => env("EMPLOYEE_REQUEST_MODAL_FIELD_TITLE", "Специалист"),
 
     // Forms
     "availableForms" => [
