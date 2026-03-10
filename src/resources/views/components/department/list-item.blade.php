@@ -7,6 +7,7 @@
                     route('web.employees.index'),
                     "?",
                     config("staff-pages.queryDepartmentKey"),
+                    "[0]",
                     "=",
                     $slug
                 ];
