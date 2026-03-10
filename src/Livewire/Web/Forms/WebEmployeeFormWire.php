@@ -90,6 +90,6 @@ class WebEmployeeFormWire extends Component implements RequestFormShowInterface
 
     public function resetFields(): void
     {
-        $this->reset("name", "phone", "comment", "privacy", "employeeFio");
+        $this->reset("name", "phone", "comment", "privacy");
     }
 }
