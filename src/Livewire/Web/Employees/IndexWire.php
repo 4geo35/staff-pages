@@ -2,6 +2,7 @@
 
 namespace GIS\StaffPages\Livewire\Web\Employees;
 
+use GIS\StaffPages\Interfaces\EmployeeDepartmentInterface;
 use GIS\StaffPages\Models\Employee;
 use GIS\StaffPages\Models\EmployeeDepartment;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,11 +14,14 @@ class IndexWire extends Component
 {
     use WithPagination;
 
+    public EmployeeDepartmentInterface|null $department = null;
+
     public Collection|null $departmentList = null;
     public mixed $searchDepartment = [];
 
     protected function queryString(): array
     {
+        if (config("staff-pages.departmentAsPages")) { return []; }
         return [
             "searchDepartment" => ["except" => "", "as" => config("staff-pages.queryDepartmentKey")],
         ];
@@ -36,10 +40,15 @@ class IndexWire extends Component
         $modelClass = config("staff-pages.customEmployeeModel") ?? Employee::class;
         $query = $modelClass::query()
             ->whereNotNull("published_at");
-        if (! empty($this->searchDepartment)) {
+        if (! config("staff-pages.departmentAsPages") && ! empty($this->searchDepartment)) {
             $query->whereHas(
                 "departments",
                 fn($q) => $q->whereIn("slug", $this->searchDepartment)->whereNotNull("published_at")
+            );
+        } elseif (! empty($this->department)) {
+            $query->whereHas(
+                "departments",
+                fn($q) => $q->where("slug", $this->department->slug)->whereNotNull("published_at")
             );
         }
         $relationsArray = ["image", "orderedImages", "activeDepartments"];

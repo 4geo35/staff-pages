@@ -1,17 +1,9 @@
-@props(["isFullPage" => false, "slug" => ""])
+@props(["isFullPage" => false, "department" => null])
 <li>
     @if ($isFullPage)
         @php
-            if (! empty($slug)) {
-                $array = [
-                    route('web.employees.index'),
-                    "?",
-                    config("staff-pages.queryDepartmentKey"),
-                    "[0]",
-                    "=",
-                    $slug
-                ];
-                $url = implode("", $array);
+            if (! empty($department)) {
+                $url = $department->teaser_link;
             } else { $url = "#"; }
         @endphp
 

@@ -43,24 +43,24 @@
                 <x-tt::form.error name="short"/>
             </div>
 
-            <div>
-                <label for="description" class="flex justify-start items-center mb-2">
-                    Описание
-                    @include("tt::admin.description-button")
-                </label>
-                @include("tt::admin.description-info")
-                <textarea id="description"
-                          class="form-control !min-h-52 {{ $errors->has('description') ? 'border-danger' : '' }}"
-                          rows="10"
-                          wire:model.live="description">
-                        {{ $description }}
-                    </textarea>
-                <x-tt::form.error name="description"/>
+{{--            <div>--}}
+{{--                <label for="description" class="flex justify-start items-center mb-2">--}}
+{{--                    Описание--}}
+{{--                    @include("tt::admin.description-button")--}}
+{{--                </label>--}}
+{{--                @include("tt::admin.description-info")--}}
+{{--                <textarea id="description"--}}
+{{--                          class="form-control !min-h-52 {{ $errors->has('description') ? 'border-danger' : '' }}"--}}
+{{--                          rows="10"--}}
+{{--                          wire:model.live="description">--}}
+{{--                        {{ $description }}--}}
+{{--                    </textarea>--}}
+{{--                <x-tt::form.error name="description"/>--}}
 
-                <div class="prose prose-sm mt-indent-half">
-                    {!! \Illuminate\Support\Str::markdown($description) !!}
-                </div>
-            </div>
+{{--                <div class="prose prose-sm mt-indent-half">--}}
+{{--                    {!! \Illuminate\Support\Str::markdown($description) !!}--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <div class="flex items-center space-x-indent-half">
                 <button type="button" class="btn btn-outline-dark" wire:click="closeData">

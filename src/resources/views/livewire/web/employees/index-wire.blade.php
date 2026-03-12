@@ -1,5 +1,9 @@
 <div class="container">
-    @include("sp::web.employees.includes.department-list")
+    @if (config("staff-pages.departmentAsPages"))
+        @include("sp::web.employees.includes.department-link-list")
+    @else
+        @include("sp::web.employees.includes.department-list")
+    @endif
 
     <div class="row">
         @php($isFullCol = config("staff-pages.fullCol"))

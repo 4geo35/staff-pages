@@ -43,4 +43,20 @@ class EmployeeDepartment extends Model implements EmployeeDepartmentInterface
             return new HasMany($this->newQuery(), $this, "", "");
         }
     }
+
+    public function getTeaserLinkAttribute(): string
+    {
+        if (config("staff-pages.departmentAsPages")) {
+            return route("web.employees.department", ["department" => $this]);
+        }
+        $array = [
+            route('web.employees.index'),
+            "?",
+            config("staff-pages.queryDepartmentKey"),
+            "[0]",
+            "=",
+            $this->slug
+        ];
+        return implode("", $array);
+    }
 }

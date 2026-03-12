@@ -4,7 +4,7 @@
     @if ($employee->departments->count())
         <ul class="hidden sm:flex flex-wrap">
             @foreach($employee->activeDepartments as $departmentItem)
-                <x-sp::department.list-item :$isFullPage :slug="$departmentItem->slug">
+                <x-sp::department.list-item :$isFullPage :department="$departmentItem">
                     {{ $departmentItem->title }}
                 </x-sp::department.list-item>
             @endforeach

@@ -11,5 +11,13 @@ Route::middleware(["web"])
             ->group(function () {
                 $controllerClass = config("staff-pages.customWebEmployeeController") ?? EmployeeController::class;
                 Route::get("/", [$controllerClass, "index"])->name("index");
+
+                if (config("staff-pages.departmentAsPages")) {
+                    Route::prefix(config("staff-pages.departmentPrefix"))
+                        ->group(function () {
+                            $controllerClass = config("staff-pages.customWebEmployeeController") ?? EmployeeController::class;
+                            Route::get("/{department}", [$controllerClass, "department"])->name("department");
+                        });
+                }
             });
     });
