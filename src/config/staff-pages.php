@@ -87,6 +87,11 @@ return [
     // Templates
     "templates" => [
         "employee-teaser" => \GIS\StaffPages\Templates\EmployeeTeaser::class,
+
+        "employee-home-teaser" => \GIS\StaffPages\Templates\EmployeeHomeTeaser::class,
+        "tablet-employee-home-teaser" => \GIS\StaffPages\Templates\TabletEmployeeHomeTeaser::class,
+        "mobile-employee-home-teaser" => \GIS\StaffPages\Templates\MobileEmployeeHomeTeaser::class,
+
         "employee-gallery-teaser" => \GIS\StaffPages\Templates\EmployeeGalleryTeaser::class,
     ],
 ];
