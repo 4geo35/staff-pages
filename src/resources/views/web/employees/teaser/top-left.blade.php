@@ -13,7 +13,7 @@
             @endif
         </div>
         @if (!empty($employee->short))
-            <div class="text-sm text-body/60">{{ $employee->short }}</div>
+            <div class="text-sm text-body/60 w-full xs:w-[196px]">{{ $employee->short }}</div>
         @endif
     </div>
 
