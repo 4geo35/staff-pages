@@ -23,6 +23,7 @@ class Employee extends Model implements EmployeeInterface
     protected string $slugKey = "fio";
 
     protected $fillable = [
+        "slug",
         "last_name",
         "name",
         "patronymic",
