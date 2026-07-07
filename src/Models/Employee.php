@@ -77,11 +77,11 @@ class Employee extends Model implements EmployeeInterface
 
     public function getFioAttribute(): string
     {
-        return trim(implode(" ", [
-            $this->last_name,
-            $this->name,
-            $this->patronymic,
-        ]));
+        $array = [];
+        if (! empty($this->last_name)) { $array[] = trim($this->last_name); }
+        if (! empty($this->name)) { $array[] = trim($this->name); }
+        if (! empty($this->patronymic)) { $array[] = trim($this->patronymic); }
+        return trim(implode(" ", $array));
     }
 
     /**
@@ -90,7 +90,7 @@ class Employee extends Model implements EmployeeInterface
      */
     public function getTitleAttribute(): string
     {
-        return $this->fio;
+        return trim($this->fio);
     }
 
     public function getCommentMarkdownAttribute(): string
