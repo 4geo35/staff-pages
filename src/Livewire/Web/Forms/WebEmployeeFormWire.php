@@ -54,7 +54,7 @@ class WebEmployeeFormWire extends Component implements RequestFormShowInterface
     }
 
     #[On("show-employee-form")]
-    public function showEmployeeForm(string $key, string $employeeFio, string $place = null): void
+    public function showEmployeeForm(string $key, string $employeeFio, ?string $place = null): void
     {
         if ($place) { $this->place = $place; }
         else { $this->reset("place"); }

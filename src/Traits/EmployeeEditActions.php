@@ -186,7 +186,7 @@ trait EmployeeEditActions
         );
     }
 
-    protected function checkAuth(string $action, EmployeeInterface $employee = null): bool
+    protected function checkAuth(string $action, ?EmployeeInterface $employee = null): bool
     {
         try {
             $modelClass = config("staff-pages.customEmployeeModel") ?? Employee::class;

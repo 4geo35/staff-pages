@@ -1,6 +1,7 @@
 <?php
 
 return [
+    // Settings
     "employeePrefix" => "employees",
     "employeePageTitle" => "Сотрудники",
 

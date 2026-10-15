@@ -150,7 +150,7 @@ trait DepartmentEditActions
         $this->reset("title", "slug", "short", "description", "departmentId");
     }
 
-    protected function checkAuth(string $action, EmployeeDepartmentInterface $department = null): bool
+    protected function checkAuth(string $action, ?EmployeeDepartmentInterface $department = null): bool
     {
         try {
             $modelClass = config("staff-pages.customDepartmentModel") ?? EmployeeDepartment::class;
